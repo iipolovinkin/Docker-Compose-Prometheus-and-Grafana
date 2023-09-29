@@ -14,6 +14,9 @@ Additional info: [Docker - Prometheus and Grafana](https://bogotobogo.com/DevOps
 
 ### Create .env:
 ```
+# WINDOWS command
+# set ADMIN_USER=admin
+# set ADMIN_PASSWORD=admin
 ADMIN_USER=admin  
 ADMIN_PASSWORD=admin
 ```
@@ -33,17 +36,17 @@ docker-compose up -d
 
 ## Containers:
 
-* Prometheus (metrics database) `http://<host-ip>:9090`
-* Prometheus-Pushgateway (push acceptor for ephemeral and batch jobs) `http://<host-ip>:9091`
-* AlertManager (alerts management) `http://<host-ip>:9093`
-* Grafana (visualize metrics) `http://<host-ip>:3000`
+* Prometheus (metrics database) http://localhost:9090
+* Prometheus-Pushgateway (push acceptor for ephemeral and batch jobs) http://localhost:9091
+* AlertManager (alerts management) http://localhost:9093
+* Grafana (visualize metrics) http://localhost:3000
 * NodeExporter (host metrics collector)
 * cAdvisor (containers metrics collector)
 * Caddy (reverse proxy and basic auth provider for prometheus and alertmanager)
 
 ## Setup Grafana
 
-Navigate to `http://<host-ip>:3000` and login with user ***admin*** password ***admin***. You can change the credentials in the compose file or by supplying the `ADMIN_USER` and `ADMIN_PASSWORD` environment variables via .env file on compose up. The config file can be added directly in grafana part like this
+Navigate to http://localhost:3000 and login with user ***admin*** password ***admin***. You can change the credentials in the compose file or by supplying the `ADMIN_USER` and `ADMIN_PASSWORD` environment variables via .env file on compose up. The config file can be added directly in grafana part like this
 ```
 grafana:
   image: grafana/grafana:5.2.4
@@ -90,7 +93,7 @@ You can find it in `grafana/dashboards/docker_host.json`, at line 480 :
 
 I work on BTRFS, so i need to change `aufs` to `btrfs`.
 
-You can find right value for your system in Prometheus `http://<host-ip>:9090` launching this request :
+You can find right value for your system in Prometheus http://localhost:9090 launching this request :
 
       node_filesystem_free_bytes
 
@@ -246,7 +249,7 @@ The AlertManager service is responsible for handling alerts sent by Prometheus s
 AlertManager can send notifications via email, Pushover, Slack, HipChat or any other system that exposes a webhook interface.
 A complete list of integrations can be found [here](https://prometheus.io/docs/alerting/configuration).
 
-You can view and silence notifications by accessing `http://<host-ip>:9093`.
+You can view and silence notifications by accessing http://localhost:9093.
 
 The notification receivers can be configured in [alertmanager/config.yml](https://github.com/Einsteinish/Docker-Compose-Prometheus-and-Grafana/blob/master/alertmanager/config.yml) file.
 

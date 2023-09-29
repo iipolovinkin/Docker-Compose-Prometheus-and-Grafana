@@ -37,3 +37,20 @@
     errors stderr
     tls off
 }
+
+:8084 {
+    proxy / gs-spring-boot-docker:8080 {
+            transparent
+        }
+
+    errors stderr
+    tls off
+}
+:8085 {
+    proxy / gs-spring-boot-docker:8085 {
+            transparent
+        }
+
+    errors stderr
+    tls off
+}

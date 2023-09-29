@@ -113,11 +113,25 @@ services:
     labels:
       org.label-schema.group: "monitoring"
 
+  gs-spring-boot-docker:
+    image: springio/gs-spring-boot-docker:latest
+    container_name: gs-spring-boot-docker
+    restart: unless-stopped
+    expose:
+      - 8080
+      - 8085
+    networks:
+      - monitor-net
+    labels:
+      org.label-schema.group: "monitoring"
+
   caddy:
     image: stefanprodan/caddy
     container_name: caddy
     ports:
       - "3000:3000"
+      - "8080:8084"
+      - "8085:8085"
       - "9090:9090"
       - "9093:9093"
       - "9091:9091"
